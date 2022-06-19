@@ -63,10 +63,10 @@ fs.readdir("./commands/", (_err, files) => {
         options: c.options,
         type: 'CHAT_INPUT'
     })), {
-        debug: true,
-        guildId: config.guildId
+        debug: true
     });
 });
+
 
 
 fs.readdir("./events/", (_err, files) => {
@@ -74,11 +74,10 @@ fs.readdir("./events/", (_err, files) => {
         if (!file.endsWith(".js")) return;
         const event = require(`./events/${file}`);
         let eventName = file.split(".")[0];
-        console.log(`👌 Event Yüklendi ${eventName}`);
+        console.log(`👌 Event yüklendi: ${eventName}`);
         client.on(eventName, event.bind(null, client));
         delete require.cache[require.resolve(`./events/${file}`)];
     });
 });
-
 
 client.login(config.token);
